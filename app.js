@@ -10,31 +10,39 @@ document.addEventListener("DOMContentLoaded", () => {
         if (taskText === "") return;
 
         const listItem = document.createElement("li");
+        const taskId = `task-${Date.now()}`;
         
         // Create task container with checkbox
         const taskContainer = document.createElement("span");
         
-        // Create checkbox
-        const checkbox = document.createElement("div");
+        // Create proper checkbox input
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.id = taskId;
         checkbox.classList.add("task-checkbox");
+        checkbox.setAttribute("aria-label", `Mark "${taskText}" as complete`);
         
-        // Create task text
-        const taskSpan = document.createElement("span");
-        taskSpan.textContent = taskText;
+        // Create label for checkbox
+        const label = document.createElement("label");
+        label.htmlFor = taskId;
+        label.textContent = taskText;
+        label.classList.add("task-label");
         
         taskContainer.appendChild(checkbox);
-        taskContainer.appendChild(taskSpan);
+        taskContainer.appendChild(label);
         
         // Checkbox toggle functionality
-        checkbox.addEventListener("click", () => {
-            checkbox.classList.toggle("checked");
-            listItem.classList.toggle("completed");
+        checkbox.addEventListener("change", () => {
+            listItem.classList.toggle("completed", checkbox.checked);
+            checkbox.setAttribute("aria-checked", checkbox.checked);
         });
 
         // Create delete button
-        const deleteBtn = document.createElement("span");
+        const deleteBtn = document.createElement("button");
         deleteBtn.textContent = "×";
         deleteBtn.classList.add("delete");
+        deleteBtn.setAttribute("aria-label", `Delete task: ${taskText}`);
+        deleteBtn.setAttribute("type", "button");
 
         deleteBtn.addEventListener("click", () => {
             // Add fade out animation before removing

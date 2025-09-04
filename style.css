@@ -49,6 +49,29 @@ body::after {
     66% { transform: rotate(240deg) scale(0.9); }
 }
 
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    body::after {
+        animation: none;
+    }
+    
+    #app::before {
+        animation: none;
+    }
+    
+    h1 {
+        animation: none;
+    }
+    
+    #todo-list li {
+        animation: none;
+    }
+    
+    button::before {
+        transition: none;
+    }
+}
+
 body::before {
     content: "";
     position: fixed;
@@ -81,6 +104,7 @@ body::before {
     padding: 40px;
     background: var(--glass-bg);
     backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
     border-radius: 30px;
     border: 1px solid rgba(0, 255, 255, 0.2);
     box-shadow: 
@@ -90,6 +114,13 @@ body::before {
     position: relative;
     z-index: 2;
     animation: slideIn 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+/* Fallback for browsers that don't support backdrop-filter */
+@supports not (backdrop-filter: blur(20px)) {
+    #app {
+        background: rgba(20, 20, 30, 0.95);
+    }
 }
 
 #app::before {
@@ -313,15 +344,20 @@ button:active {
     gap: 15px;
 }
 
+/* Proper checkbox styling */
 .task-checkbox {
+    -webkit-appearance: none;
+    appearance: none;
     width: 24px;
     height: 24px;
+    min-width: 24px;
     border: 2px solid var(--neon-cyan);
     border-radius: 6px;
     background: transparent;
     cursor: pointer;
     position: relative;
     transition: all 0.3s;
+    margin: 0;
 }
 
 .task-checkbox:hover {
@@ -329,12 +365,22 @@ button:active {
     box-shadow: 0 0 10px var(--neon-cyan);
 }
 
-.task-checkbox.checked {
+.task-checkbox:focus {
+    outline: 2px solid var(--neon-cyan);
+    outline-offset: 2px;
+}
+
+.task-checkbox:focus-visible {
+    outline: 2px solid var(--neon-purple);
+    outline-offset: 2px;
+}
+
+.task-checkbox:checked {
     background: var(--neon-cyan);
     border-color: var(--neon-cyan);
 }
 
-.task-checkbox.checked::after {
+.task-checkbox:checked::after {
     content: '✓';
     position: absolute;
     top: 50%;
@@ -345,7 +391,21 @@ button:active {
     font-size: 16px;
 }
 
-.delete {
+/* Label styling */
+.task-label {
+    cursor: pointer;
+    flex: 1;
+    padding-left: 12px;
+    user-select: none;
+}
+
+.completed .task-label {
+    text-decoration: line-through;
+    opacity: 0.6;
+}
+
+/* Delete button styling */
+button.delete {
     color: var(--neon-pink);
     cursor: pointer;
     font-weight: 700;
@@ -358,7 +418,17 @@ button:active {
     font-size: 18px;
 }
 
-.delete:hover {
+button.delete:focus {
+    outline: 2px solid var(--neon-pink);
+    outline-offset: 2px;
+}
+
+button.delete:focus-visible {
+    outline: 2px solid var(--neon-purple);
+    outline-offset: 2px;
+}
+
+button.delete:hover {
     background: rgba(255, 20, 147, 0.3);
     transform: scale(1.1) rotate(90deg);
     box-shadow: 0 0 20px var(--neon-pink);
@@ -400,4 +470,29 @@ button:active {
 
 ::-webkit-scrollbar-thumb:hover {
     background: linear-gradient(180deg, var(--neon-purple), var(--neon-pink));
+}
+
+/* Firefox scrollbar */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--neon-cyan) rgba(0, 0, 0, 0.3);
+}
+
+/* Focus visible improvements for better accessibility */
+*:focus-visible {
+    outline: 2px solid var(--neon-purple);
+    outline-offset: 2px;
+}
+
+/* Skip to content link for screen readers */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    white-space: nowrap;
+    border: 0;
 }
