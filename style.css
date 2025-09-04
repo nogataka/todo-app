@@ -75,3 +75,68 @@ button:hover {
 .delete:hover {
     text-decoration: underline;
 }
+
+.confirm-dialog {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    min-width: 400px;
+    text-align: center;
+}
+
+.confirm-dialog h3 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 20px;
+    color: #333;
+}
+
+.confirm-dialog p {
+    margin-bottom: 25px;
+    font-size: 16px;
+    color: #555;
+}
+
+.confirm-dialog-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.confirm-dialog button {
+    padding: 12px 24px;
+    font-size: 16px;
+    min-width: 100px;
+}
+
+.confirm-dialog .cancel-btn {
+    background-color: #6c757d;
+}
+
+.confirm-dialog .cancel-btn:hover {
+    background-color: #545b62;
+}
+
+.confirm-dialog .delete-btn {
+    background-color: #dc3545;
+}
+
+.confirm-dialog .delete-btn:hover {
+    background-color: #c82333;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}

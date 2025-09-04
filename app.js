@@ -1,3 +1,39 @@
+function showDeleteConfirmDialog(taskText, onConfirm) {
+    const overlay = document.createElement("div");
+    overlay.classList.add("overlay");
+    
+    const dialog = document.createElement("div");
+    dialog.classList.add("confirm-dialog");
+    
+    dialog.innerHTML = `
+        <h3>タスクを削除</h3>
+        <p>「${taskText}」を削除してもよろしいですか？</p>
+        <div class="confirm-dialog-buttons">
+            <button class="cancel-btn">キャンセル</button>
+            <button class="delete-btn">削除</button>
+        </div>
+    `;
+    
+    document.body.appendChild(overlay);
+    document.body.appendChild(dialog);
+    
+    const cancelBtn = dialog.querySelector(".cancel-btn");
+    const deleteBtn = dialog.querySelector(".delete-btn");
+    
+    const closeDialog = () => {
+        overlay.remove();
+        dialog.remove();
+    };
+    
+    cancelBtn.addEventListener("click", closeDialog);
+    overlay.addEventListener("click", closeDialog);
+    
+    deleteBtn.addEventListener("click", () => {
+        onConfirm();
+        closeDialog();
+    });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("todo-form");
     const taskInput = document.getElementById("new-task");
@@ -17,7 +53,9 @@ document.addEventListener("DOMContentLoaded", () => {
         deleteBtn.classList.add("delete");
 
         deleteBtn.addEventListener("click", () => {
-            listItem.remove();
+            showDeleteConfirmDialog(taskText, () => {
+                listItem.remove();
+            });
         });
 
         listItem.appendChild(deleteBtn);
