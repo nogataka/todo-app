@@ -17,7 +17,9 @@ document.addEventListener("DOMContentLoaded", () => {
         deleteBtn.classList.add("delete");
 
         deleteBtn.addEventListener("click", () => {
-            listItem.remove();
+            if (confirm("このタスクを削除してもよろしいですか？")) {
+                listItem.remove();
+            }
         });
 
         listItem.appendChild(deleteBtn);
