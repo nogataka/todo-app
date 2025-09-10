@@ -33,7 +33,8 @@ function findAvailablePort(startPort) {
 
 async function startServer() {
   try {
-    const port = await findAvailablePort(3000);
+    const defaultPort = process.env.PORT ? parseInt(process.env.PORT) : 3000;
+    const port = await findAvailablePort(defaultPort);
     app.listen(port, () => {
       console.log(`Server is running on http://localhost:${port}`);
     });
