@@ -75,3 +75,64 @@ button:hover {
 .delete:hover {
     text-decoration: underline;
 }
+
+/* Custom Dialog Styles */
+.dialog-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(173, 216, 230, 0.7); /* Light blue background */
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.dialog-overlay.show {
+    display: flex;
+}
+
+.dialog-box {
+    background: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    max-width: 350px;
+}
+
+.dialog-box p {
+    margin-bottom: 20px;
+    font-size: 16px;
+    color: #333;
+}
+
+.dialog-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.dialog-buttons button {
+    padding: 10px 20px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+#confirmYes {
+    background-color: #dc3545;
+}
+
+#confirmYes:hover {
+    background-color: #c82333;
+}
+
+#confirmNo {
+    background-color: #6c757d;
+}
+
+#confirmNo:hover {
+    background-color: #5a6268;
+}
