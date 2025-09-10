@@ -15,6 +15,17 @@
         </form>
         <ul id="todo-list"></ul>
     </div>
+    
+    <!-- 削除確認ダイアログ -->
+    <div id="delete-dialog" class="dialog-overlay">
+        <div class="dialog-content">
+            <p>このタスクを削除してもよろしいですか？</p>
+            <div class="dialog-buttons">
+                <button id="confirm-delete" class="btn-confirm">削除</button>
+                <button id="cancel-delete" class="btn-cancel">キャンセル</button>
+            </div>
+        </div>
+    </div>
     <script src="app.js"></script>
 </body>
 </html>
