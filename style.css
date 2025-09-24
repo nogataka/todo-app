@@ -95,7 +95,7 @@ button:hover {
 
 .confirm-dialog {
     position: relative;
-    background: #f7f7f7; /* 薄いグレー */
+    background: #f3e8ff; /* 薄い紫 */
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 6px 18px rgba(0,0,0,0.2);
