@@ -95,7 +95,7 @@ button:hover {
 
 .confirm-dialog {
     position: relative;
-    background: #f7f7f7; /* 薄いグレー */
+    background: #eeeeee; /* 削除確認ダイアログの背景を薄いグレーに設定 */
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 6px 18px rgba(0,0,0,0.2);
