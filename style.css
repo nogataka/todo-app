@@ -90,7 +90,7 @@ button:hover {
 .confirm-overlay {
     position: absolute;
     inset: 0;
-    background: rgba(0, 0, 0, 0.4);
+    background: rgba(240, 240, 240, 0.9);
 }
 
 .confirm-dialog {
