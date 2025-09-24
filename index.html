@@ -15,6 +15,19 @@
         </form>
         <ul id="todo-list"></ul>
     </div>
+
+    <!-- カスタム確認ダイアログ -->
+    <div id="confirm-modal" class="hidden" aria-hidden="true">
+        <div class="confirm-overlay"></div>
+        <div class="confirm-dialog" role="dialog" aria-modal="true" aria-labelledby="confirm-title">
+            <p id="confirm-message"></p>
+            <div class="confirm-actions">
+                <button id="confirm-yes" class="btn-yes">はい</button>
+                <button id="confirm-no" class="btn-no">いいえ</button>
+            </div>
+        </div>
+    </div>
+
     <script src="app.js"></script>
 </body>
 </html>

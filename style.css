@@ -75,3 +75,56 @@ button:hover {
 .delete:hover {
     text-decoration: underline;
 }
+
+/* カスタム確認ダイアログ */
+#confirm-modal.hidden { display: none; }
+#confirm-modal {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.confirm-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.confirm-dialog {
+    position: relative;
+    background: #f7f7f7; /* 薄いグレー */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+    max-width: 320px;
+    width: calc(100% - 40px);
+    z-index: 1001;
+}
+
+.confirm-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 12px;
+}
+
+.btn-yes {
+    background: #e74c3c;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn-no {
+    background: #6c757d;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+}

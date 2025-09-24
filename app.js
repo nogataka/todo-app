@@ -17,9 +17,12 @@ document.addEventListener("DOMContentLoaded", () => {
         deleteBtn.classList.add("delete");
 
         deleteBtn.addEventListener("click", () => {
-            if (confirm("このタスクを削除してもよろしいですか？")) {
-                listItem.remove();
-            }
+            // カスタム確認ダイアログを表示して削除を制御
+            showConfirm("このタスクを削除してもよろしいですか？").then((confirmed) => {
+                if (confirmed) {
+                    listItem.remove();
+                }
+            });
         });
 
         listItem.appendChild(deleteBtn);
@@ -28,3 +31,41 @@ document.addEventListener("DOMContentLoaded", () => {
         taskInput.value = "";
     });
 });
+
+// カスタム確認ダイアログの実装
+function showConfirm(message) {
+    return new Promise((resolve) => {
+        const modal = document.getElementById("confirm-modal");
+        const overlay = modal.querySelector(".confirm-overlay");
+        const dialog = modal.querySelector(".confirm-dialog");
+        const msg = document.getElementById("confirm-message");
+        const yesBtn = document.getElementById("confirm-yes");
+        const noBtn = document.getElementById("confirm-no");
+
+        msg.textContent = message;
+        modal.classList.remove("hidden");
+        modal.setAttribute("aria-hidden", "false");
+
+        const cleanUp = () => {
+            yesBtn.removeEventListener("click", onYes);
+            noBtn.removeEventListener("click", onNo);
+            overlay.removeEventListener("click", onNo);
+            modal.classList.add("hidden");
+            modal.setAttribute("aria-hidden", "true");
+        };
+
+        const onYes = () => { cleanUp(); resolve(true); };
+        const onNo = () => { cleanUp(); resolve(false); };
+
+        yesBtn.addEventListener("click", onYes);
+        noBtn.addEventListener("click", onNo);
+        overlay.addEventListener("click", onNo);
+
+        // キーボード操作対応
+        const onKey = (e) => {
+            if (e.key === "Escape") { onNo(); }
+            if (e.key === "Enter") { onYes(); }
+        };
+        document.addEventListener("keydown", onKey, { once: true });
+    });
+}
